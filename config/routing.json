@@ -1,0 +1,15 @@
+{
+    "/": "ViewController:getHome",
+    "/test": "TestController:getTest",
+    "/les_cartes":"ViewController:getCartes",
+    "/api/users":{
+        "GET":"DAOUser:getAll",
+        "DELETE":"DAOUser:deleteAll"
+    },
+    "/api/users/(:)":{
+        "GET":"DAOUser:retrieve",
+        "PUT":"DAOUser:update",
+        "DELETE":"DAOUser:delete",
+        "POST":"DAOUser:create"
+    }
+}
