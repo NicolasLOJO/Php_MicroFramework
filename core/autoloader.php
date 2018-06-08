@@ -5,11 +5,13 @@
             include'./core/'.$class.'.php';
         elseif(file_exists('./models/'.$class.'.php')):
             include'./models/'.$class.'.php';
-        elseif(file_exists('./controller/'.$class.'.php')):
-            include'./controller/'.$class.'.php';
+        elseif(file_exists('./controllers/'.$class.'.php')):
+            include'./controllers/'.$class.'.php';
         elseif(file_exists('./core/dao/'.$class.'.php')):
             include"./core/dao/$class.php";
         elseif(file_exists('./core/interfaces/'.$class.'.php')):
             include"./core/interfaces/$class.php";
+        elseif(file_exists('./core/controller/'.$class.'.php')):
+            include"./core/controller/$class.php";
         endif;
     });

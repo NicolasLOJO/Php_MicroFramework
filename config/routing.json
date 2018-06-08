@@ -1,6 +1,6 @@
 {
     "/": "ViewController:getHome",
-    "/test": "TestController:getTest",
+    "/test": "ViewController:getView",
     "/les_cartes":"ViewController:getCartes",
     "/api/users":{
         "GET":"DAOUser:getAll",
@@ -11,5 +11,6 @@
         "PUT":"DAOUser:update",
         "DELETE":"DAOUser:delete",
         "POST":"DAOUser:create"
-    }
+    },
+    "/install" : "install:install"
 }

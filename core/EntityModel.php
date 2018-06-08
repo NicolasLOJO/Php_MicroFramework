@@ -6,12 +6,11 @@ abstract class EntityModel implements Persistable {
 
     public function __construct(){
         $name = "DAO".get_class($this);
-        DAOGenerating::generate($name, $this::table);
         $this->dao = new $name();
     }
 
     public function load(){
-        return $this->dao->retrieve(12);
+        return $this->dao->retrieve(3);
     }
 
     public function update(){
