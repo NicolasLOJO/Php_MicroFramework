@@ -13,5 +13,7 @@
             include"./core/interfaces/$class.php";
         elseif(file_exists('./core/controller/'.$class.'.php')):
             include"./core/controller/$class.php";
+        elseif(file_exists("./core/QueryBuilder/$class.php")):
+            include"./core/QueryBuilder/$class.php";
         endif;
     });

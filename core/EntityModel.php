@@ -2,23 +2,39 @@
 
 abstract class EntityModel implements Persistable {
 
-    protected $dao;
+    protected static $dao;
 
     public function __construct(){
         $name = "DAO".get_class($this);
-        $this->dao = new $name();
+        self::$dao = new $name();
     }
 
     public function load(){
-        return $this->dao->retrieve(3);
+        $entity = self::$dao->retrieve($this->get_id());
+        if(empty($entity)){
+            return false;
+        } else {
+            return $this->hydrate($entity);
+        }
     }
 
     public function update(){
-        //return $this->dao->update($id);
-        //return $this->dao->create($array_assoc);
+        $assoc_array = [];
+        if(empty($this->get_id())){
+            foreach($this as $key => $value){
+                $assoc_array[$key] = $value;
+            }
+            $entity = self::$dao->create($assoc_array);
+            return $this->hydrate($entity);
+        } else {
+            foreach($this as $key => $value){
+                $assoc_array[$key] = $value;
+            }
+            return self::$dao->update($assoc_array,$this->get_id());
+        }
     }
 
     public function remove(){
-        //return $this->dao->delete($id);
+        return self::$dao->delete($this->get_id());
     }
 }

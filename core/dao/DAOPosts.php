@@ -1,18 +1,10 @@
 <?php
-
-class DAOGenerating {
-
-    public static function generate($name, $table) {
-        if(!file_exists("./core/dao/$name.php")){
-            $createDao = fopen("./core/dao/$name.php", "w");
-
-        $header = '<?php
-class '.$name.' extends DAO{
+class DAOPosts extends DAO{
     
     public function retrieve($id){
         //retourne entité
         $qb = new Query();
-        $sql = $qb->table("'.$table.'")->select("*")->where("id = $id")->getQuery();
+        $sql = $qb->table("posts")->select("*")->where("id = $id")->getQuery();
         $value = $qb->getValue();
         var_dump($sql);
         $db = $this->pdo;
@@ -23,7 +15,7 @@ class '.$name.' extends DAO{
 
     public function update($entity, $id){
         $qb = new Query();
-        $sql = $qb->table("'.$table.'")->update($entity)->where("id = $id")->getQuery();
+        $sql = $qb->table("posts")->update($entity)->where("id = $id")->getQuery();
         $value = $qb->getValue();
         $db = $this->pdo;
         $req = $db->prepare($sql);
@@ -32,7 +24,7 @@ class '.$name.' extends DAO{
 
     public function delete($id){
         $qb = new Query();
-        $sql = $qb->table("'.$table.'")->delete()->where("id = $id")->getQuery();
+        $sql = $qb->table("posts")->delete()->where("id = $id")->getQuery();
         $value = $qb->getValue();
         $db = $this->pdo;
         $req = $db->prepare($sql);
@@ -43,7 +35,7 @@ class '.$name.' extends DAO{
     public function create($array_assoc){
         //retourne entité
         $qb = new Query();
-        $sql = $qb->table("'.$table.'")->insert($array_assoc)->getQuery();
+        $sql = $qb->table("posts")->insert($array_assoc)->getQuery();
         $value = $qb->getValue();
         $db = $this->pdo;
         $req = $db->prepare($sql);
@@ -54,7 +46,7 @@ class '.$name.' extends DAO{
     public function getAllBy($array_assoc){
         //clause where et and dans array_assoc
         $qb = new Query();
-        $sql = $qb->table("'.$table.'")->select(\'*\')->where($array_assoc)->getQuery();
+        $sql = $qb->table("posts")->select('*')->where($array_assoc)->getQuery();
         $value = $qb->getValue();
         $db = $this->pdo;
         $req = $db->prepare($sql);
@@ -64,16 +56,10 @@ class '.$name.' extends DAO{
 
     public function getAll(){
         $qb = new Query();
-        $sql = $qb->table("'.$table.'")->select(\'*\')->getQuery();
+        $sql = $qb->table("posts")->select('*')->getQuery();
         $db = $this->pdo;
         $rep = $db->query($sql);
         var_dump($rep->fetchAll(PDO::FETCH_ASSOC));
         return $rep->fetchAll(PDO::FETCH_ASSOC);
     }
-}';
-
-        fwrite($createDao, $header);
-        }
-    }
-
 }

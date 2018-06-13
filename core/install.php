@@ -12,9 +12,9 @@ class install {
 
     public function install(){
         if($this->config['install'] == "on"){
-            if(!empty($this->config['table'])){
+            if(!empty($this->config['dbname'])){
                 $db = $this->pdo;
-                $sql = "SHOW TABLES FROM ".$this->config['table'];
+                $sql = "SHOW TABLES FROM ".$this->config['dbname'];
                 $rep = $db->query($sql);
                 $table = $rep->fetchAll(PDO::FETCH_COLUMN);
                 $this->createEntity($table);
@@ -49,14 +49,22 @@ class '.$name.' extends EntityModel{
 '.$this->createConstruct($value).'
     }
 
+    public function hydrate($array){
+        foreach($array as $key => $value){
+            $setter = "set_$key";
+            $this->$setter($value);
+        }
+        return $this;
+    }
+
 '.$this->createFunction($value).'
 }';
 //*********************************************************************//
                 fwrite($modelGenerate, $model);
                 //var_dump($model);
-                echo "Le model $name a était crée avec succès<br>";
+                echo "Le model $name a été créer avec succès<br>";
             } else {
-                echo "Impossible de crée le model $name.php (déjà existant)<br>";
+                echo "Impossible de créer le model $name.php (déjà existant)<br>";
                 $error++;
             }
         }

@@ -1,4 +1,4 @@
 {
     "install" : "on",
-    "table" : ""
+    "dbname" : "test"
 }

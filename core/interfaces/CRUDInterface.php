@@ -4,7 +4,7 @@ interface CRUDInterface {
 
     public function retrieve($id);
 
-    public function update($id);
+    public function update($entity, $id);
 
     public function delete($id);
 
