@@ -14,7 +14,6 @@ class '.$name.' extends DAO{
         $qb = new Query();
         $sql = $qb->table("'.$table.'")->select("*")->where("id = $id")->getQuery();
         $value = $qb->getValue();
-        var_dump($sql);
         $db = $this->pdo;
         $rep = $db->prepare($sql);
         $rep->execute($value);
@@ -67,7 +66,6 @@ class '.$name.' extends DAO{
         $sql = $qb->table("'.$table.'")->select(\'*\')->getQuery();
         $db = $this->pdo;
         $rep = $db->query($sql);
-        var_dump($rep->fetchAll(PDO::FETCH_ASSOC));
         return $rep->fetchAll(PDO::FETCH_ASSOC);
     }
 }';
